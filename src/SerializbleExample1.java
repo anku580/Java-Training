@@ -1,0 +1,49 @@
+// Java code for serialization and deserialization
+// of a Java Object
+
+import java.io.*;
+
+class SerializbleExample {
+
+	/**
+	 * @param args
+	 */
+	private static final long serialVersionUID = 1L;
+	public int a;
+	public String b;
+	
+	//paramerterized constructor
+	public SerializbleExample(int a, String b) {
+		this.a = a;
+		this.b = b;
+	}
+
+}
+
+public class SerializbleExample1 {
+	
+	public static void main(String args[]) 
+	{
+		SerializbleExample object = new SerializbleExample(1, "Object Serialization and Deserialization");
+		String filename = "C:\\Users\\anku.garg\\workspace\\Java Project\\src\\demo.java";
+		
+		//Serialization
+		try
+		{
+			//saving of object in a file
+			FileOutputStream file = new FileOutputStream(filename);
+			ObjectOutputStream out = new ObjectOutputStream(file);
+			
+			//Method for serialization of object
+			out.writeObject(object);
+			
+			out.close();
+			file.close();
+			
+			System.out.println("Object has been serialized");
+		}catch(IOException ex)
+		{
+			System.out.println("IOException is caught");
+		}
+	}
+}
