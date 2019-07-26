@@ -1,9 +1,6 @@
-// Java code for serialization and deserialization
-// of a Java Object
-
 import java.io.*;
 
-class SerializbleExample {
+class SerializbleExample implements Serializable {
 
 	/**
 	 * @param args
@@ -13,7 +10,8 @@ class SerializbleExample {
 	public String b;
 	
 	//paramerterized constructor
-	public SerializbleExample(int a, String b) {
+	public SerializbleExample(int a, String b)
+	{
 		this.a = a;
 		this.b = b;
 	}
@@ -44,6 +42,36 @@ public class SerializbleExample1 {
 		}catch(IOException ex)
 		{
 			System.out.println("IOException is caught");
+		}
+		
+		SerializbleExample object1 = null;
+		
+		//Deserialization
+		
+		try 
+		{
+			//Reading the object from a file
+			FileInputStream file = new FileInputStream(filename);
+			ObjectInputStream in = new ObjectInputStream(file);
+			
+			//Method for deserialization of object
+			object1 = (SerializbleExample)in.readObject();
+			
+			in.close();
+			file.close();
+			
+			System.out.println("Object has been deserialized");
+			System.out.println("a = " + object1.a);
+			System.out.println("b = " + object1.b);
+		}
+		catch(IOException ex) 
+		{
+			System.out.println("IOException is caught");
+		}
+		
+		catch(ClassNotFoundException ex)
+		{
+			System.out.println("ClassNotFoundException is caught");
 		}
 	}
 }
